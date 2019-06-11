@@ -1,0 +1,31 @@
+
+# RUN cp ./aliases ~/.playground && printf "\nsource ~/.playground" >> ~/.bashrc && source ~/.bashrc
+
+function play() {
+    local command="$@"
+	docker run --rm --user=playground -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+}
+
+function playroot() {
+    local command="$@"
+	docker run --rm -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+}
+
+alias node="play node"
+alias npm="play npm"
+alias gulp="play gulp"
+alias vue="play vue"
+alias watch="npm run watch"
+alias build="npm run prod"
+
+alias mysql="play mysql"
+alias mysqldump="play mysqldump"
+
+alias php="play php"
+alias composer="play composer"
+alias cautoload='composer dump-autoload -o'
+alias art='php artisan'
+alias tinker='art tinker'
+alias serve='art serve'
+alias cc='art config:cache'
+alias migrate='art migrate'
