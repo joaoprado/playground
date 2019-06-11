@@ -6,6 +6,11 @@ function play() {
 	docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
 }
 
+function playni() {
+    local command="$@"
+	docker run --rm --user=playground --network dev_backend -i -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+}
+
 function playroot() {
     local command="$@"
 	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
