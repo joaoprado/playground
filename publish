@@ -1,0 +1,18 @@
+
+if [ $# -eq 0 ]
+  then
+    echo "Tag de versão não informada!"
+    exit 1
+fi
+
+# Publish new version
+echo "Publicando nova tag: $1"
+docker build -t playground:$1 .
+docker tag playground:$1 joaoprado/playground:$1
+docker push joaoprado/playground:$1
+
+# Publish latest stuff to latest tag
+echo "Atualizando tag latest"
+docker build -t playground:latest .
+docker tag playground:latest joaoprado/playground:latest
+docker push joaoprado/playground:latest
