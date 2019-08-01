@@ -15,7 +15,8 @@ RUN apk add --no-cache --update \
     php7-phar php7-zip php7-session \
     mariadb-client \
     composer \
-    && npm i -g @vue/cli gulp npm-check \
+    python python-dev py-pip build-base \
+    && npm i -g @vue/cli gulp ionic npm-check \
     && rm -rf /var/cache/apk/* /tmp/*
 
 RUN addgroup -g 1000 -S playground \
