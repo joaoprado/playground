@@ -1,37 +1,70 @@
 
 # RUN cp ./aliases ~/.playground && printf "\nsource ~/.playground" >> ~/.bashrc && source ~/.bashrc
 
-function play() {
+function play-php() {
     local command="$@"
-	docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+	docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-php ash -c "$command"
 }
-
-function playni() {
+function play-php-ni() {
     local command="$@"
-	docker run --rm --user=playground --network dev_backend -i -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+	docker run --rm --user=playground --network dev_backend -i -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-php ash -c "$command"
 }
-
-function playroot() {
+function play-php-root() {
     local command="$@"
-	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src joaoprado/playground ash -c "$command"
+	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-php ash -c "$command"
 }
+alias docker-php="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-php ash"
+alias docker-php-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-php ash"
 
-alias node="play node"
-alias npm="play npm"
-alias gulp="play gulp"
-alias vue="play vue"
-alias ionic="play ionic"
-alias watch="npm run watch"
-alias build="npm run prod"
+alias mysql="play-php mysql"
+alias mysqldump="play-php mysqldump"
 
-alias mysql="play mysql"
-alias mysqldump="play mysqldump"
-
-alias php="play php"
-alias composer="play composer"
+alias php="play-php php"
+alias composer="play-php composer"
+alias phpunit="play-php vendor/bin/phpunit"
+alias phpcs="play-php vendor/bin/phpcs"
 alias cautoload='composer dump-autoload -o'
 alias art='php artisan'
 alias tinker='art tinker'
 alias serve='art serve'
 alias cc='art config:cache'
 alias migrate='art migrate'
+
+function play-npm() {
+    local command="$@"
+	docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash -c "$command"
+}
+function play-npm-ni() {
+    local command="$@"
+	docker run --rm --user=playground --network dev_backend -i -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash -c "$command"
+}
+function play-npm-root() {
+    local command="$@"
+	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash -c "$command"
+}
+alias docker-php="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
+alias docker-php-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
+
+alias node="play-npm node"
+alias npm="play-npm npm"
+alias gulp="play-npm gulp"
+alias vue="play-npm vue"
+alias watch="npm run watch"
+alias build="npm run prod"
+
+function play-ionic() {
+    local command="$@"
+	docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash -c "$command"
+}
+function play-ionic-ni() {
+    local command="$@"
+	docker run --rm --user=playground --network dev_backend -i -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash -c "$command"
+}
+function play-ionic-root() {
+    local command="$@"
+	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash -c "$command"
+}
+alias docker-php="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
+alias docker-php-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
+
+alias ionic="play-ionic ionic"

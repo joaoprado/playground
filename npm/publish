@@ -1,0 +1,18 @@
+
+if [ $# -eq 0 ]
+  then
+    echo "Tag de versão não informada!"
+    exit 1
+fi
+
+# Publish new version
+echo "[NPM] Publicando nova tag: $1"
+docker build -t playground-npm:$1 .
+docker tag playground-npm:$1 joaoprado/playground-npm:$1
+docker push joaoprado/playground-npm:$1
+
+# Publish latest stuff to latest tag
+echo "[NPM] Atualizando tag latest"
+docker build -t playground-npm:latest .
+docker tag playground-npm:latest joaoprado/playground-npm:latest
+docker push joaoprado/playground-npm:latest

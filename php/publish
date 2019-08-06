@@ -1,0 +1,18 @@
+
+if [ $# -eq 0 ]
+  then
+    echo "Tag de versão não informada!"
+    exit 1
+fi
+
+# Publish new version
+echo "[PHP] Publicando nova tag: $1"
+docker build -t playground-php:$1 .
+docker tag playground-php:$1 joaoprado/playground-php:$1
+docker push joaoprado/playground-php:$1
+
+# Publish latest stuff to latest tag
+echo "[PHP] Atualizando tag latest"
+docker build -t playground-php:latest .
+docker tag playground-php:latest joaoprado/playground-php:latest
+docker push joaoprado/playground-php:latest
