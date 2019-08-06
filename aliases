@@ -23,6 +23,7 @@ alias php="play-php php"
 alias composer="play-php composer"
 alias phpunit="play-php vendor/bin/phpunit"
 alias phpcs="play-php vendor/bin/phpcs"
+alias phpcsl="play-php vendor/bin/phpcs --standard=phpcs.xml $(git diff master --name-only --diff-filter=)'"
 alias cautoload='composer dump-autoload -o'
 alias art='php artisan'
 alias tinker='art tinker'
