@@ -17,5 +17,7 @@ RUN apk add --no-cache --update \
     composer \
     && rm -rf /var/cache/apk/* /tmp/*
 
+COPY ./overrides.ini /etc/php7/conf.d/overrides.ini
+
 RUN addgroup -g 1000 -S playground \
     && adduser -u 1000 -S playground -G playground

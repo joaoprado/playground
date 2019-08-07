@@ -43,8 +43,8 @@ function play-npm-root() {
     local command="$@"
 	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash -c "$command"
 }
-alias docker-php="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
-alias docker-php-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
+alias docker-npm="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
+alias docker-npm-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-npm ash"
 
 alias node="play-npm node"
 alias npm="play-npm npm"
@@ -65,7 +65,7 @@ function play-ionic-root() {
     local command="$@"
 	docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash -c "$command"
 }
-alias docker-php="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
-alias docker-php-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
+alias docker-ionic="docker run --rm --user=playground --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
+alias docker-ionic-root="docker run --rm --network dev_backend -ti -w /usr/src -v ${PWD}:/usr/src -v /home/joaoprado/.ssh:/usr/keys joaoprado/playground-ionic ash"
 
 alias ionic="play-ionic ionic"
