@@ -7,22 +7,29 @@
 FROM alpine:latest
 LABEL maintainer="João Prado <contato@joaoprado.com.br>"
 
+USER root
+
 ENV GLIB_PACKAGE_BASE_URL https://github.com/sgerrand/alpine-pkg-glibc/releases/download
-ENV GLIB_VERSION 2.25-r0
+#ENV GLIB_VERSION 2.25-r0
+ENV GLIB_VERSION 2.30-r0
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
 ENV GRADLE_HOME /usr/local/gradle
-ENV GRADLE_VERSION 4.4
+#ENV GRADLE_VERSION 4.4
+ENV GRADLE_VERSION 6.0.1
 
+ENV ANDROID_SDK_ROOT /usr/local/android-sdk-linux
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV ANDRDOID_TOOLS_VERSION r25.2.5
+#ENV ANDRDOID_TOOLS_VERSION r26.0.2
 ENV ANDROID_API_LEVELS android-26
-ENV ANDROID_BUILD_TOOLS_VERSION 26.0.2
+#ENV ANDROID_BUILD_TOOLS_VERSION 26.0.2
+ENV ANDROID_BUILD_TOOLS_VERSION 29.0.0
 
 ENV IONIC_VERSION 4.12.0
 
-ENV PATH ${GRADLE_HOME}/bin:${JAVA_HOME}/bin:${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
+ENV PATH /usr/local/gradle/bin:/usr/lib/jvm/java-1.8-openjdk/bin:/usr/local/android-sdk-linux/tools:/usr/local/android-sdk-linux/platform-tools:$PATH
 
 RUN apk upgrade && apk update \
     & apk add --no-cache --update \
@@ -58,4 +65,6 @@ RUN mkdir $ANDROID_HOME/licenses \
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
-EXPOSE 8100
+ADD profile.sh /etc/profile.d
+
+WORKDIR /usr/src

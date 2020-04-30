@@ -1,0 +1,1 @@
+export PATH="/usr/local/gradle/bin:/usr/lib/jvm/java-1.8-openjdk/bin:/usr/local/android-sdk-linux/tools:/usr/local/android-sdk-linux/platform-tools:$PATH"

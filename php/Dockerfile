@@ -4,29 +4,31 @@
 #--------------------------------------------------------------------------
 #
 
-FROM alpine:latest
+FROM php:7.4-alpine
 LABEL maintainer="João Prado <contato@joaoprado.com.br>"
 
 RUN apk add --no-cache --update \
+    freetype freetype-dev \
+    libjpeg-turbo libjpeg-turbo-dev \
+    libpng libpng-dev \
+    libwebp-dev \
+    libxpm-dev \
+    libzip-dev \
+    zlib-dev \
     git openssh \
-    php7 php7-curl php7-bcmath php7-gd php7-json php7-mbstring \
-    php7-mysqli php7-pdo php7-pdo_mysql php7-pdo_sqlite \
-    php7-phar php7-zip php7-session php7-posix php-pcntl \
-    php7-tokenizer php7-dom php7-xml php7-simplexml php7-xmlreader php7-fileinfo php7-ctype php7-xmlwriter \
     mariadb-client \
-    composer \
-    python python-dev py-pip build-base \
+    make \
     && rm -rf /var/cache/apk/* /tmp/*
+
+RUN docker-php-ext-install bcmath iconv mysqli gd opcache pcntl pdo pdo_mysql zip
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=1.10.1 \
+    && composer global require hirak/prestissimo
 
 RUN addgroup -g 1000 -S playground \
     && adduser -u 1000 -S playground -G playground
 
-COPY ./overrides.ini /etc/php7/conf.d/overrides.ini
-COPY ./composer.json /root/.composer/composer.json
-RUN chown -R playground:playground /root/.composer
-
-RUN composer global install
-RUN git clone https://github.com/cmheisel/pywatch.git && cd pywatch && python setup.py install && cd .. && rm -rf pywatch
+COPY ./overrides.ini /usr/local/etc/php/conf.d/overrides.ini
 
 ADD aliases.sh /etc/profile.d
 

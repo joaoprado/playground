@@ -11,7 +11,7 @@ RUN apk add --no-cache --update \
     nodejs nodejs-npm \
     git \
     python python-dev py-pip build-base \
-    && npm i -g @vue/cli gulp npm-check \
+    && npm i -g @vue/cli gulp npm-check json-server \
     && rm -rf /var/cache/apk/* /tmp/*
 
 RUN addgroup -g 1000 -S playground \
