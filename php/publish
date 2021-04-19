@@ -12,7 +12,7 @@ docker tag playground-php:$1 joaoprado/playground-php:$1
 docker push joaoprado/playground-php:$1
 
 # Publish latest stuff to latest tag
-echo "[PHP] Atualizando tag latest"
-docker build -t playground-php:latest .
-docker tag playground-php:latest joaoprado/playground-php:latest
-docker push joaoprado/playground-php:latest
+#echo "[PHP] Atualizando tag latest"
+#docker build -t playground-php:latest .
+#docker tag playground-php:latest joaoprado/playground-php:latest
+#docker push joaoprado/playground-php:latest

@@ -1,14 +1,13 @@
+alias test='vendor/bin/pest --stop-on-error --stop-on-failure'
 alias cautoload='composer dump-autoload -o'
+alias testdb='php artisan migrate:fresh --env=testing && php artisan db:seed --class=TestDatabaseSeeder --env=testing'
 alias art='php artisan'
-alias tinker='art tinker'
 alias serve='art serve'
+alias tinker='art tinker'
+alias pest='vendor/bin/pest'
+alias rollback='art migrate:rollback'
+alias utest='vendor/bin/pest --stop-on-error --stop-on-failure tests/Unit'
 alias cc='art cache:clear && art config:clear'
 alias migrate='art migrate'
-alias rollback='art migrate:rollback'
-
-alias testdb="php artisan migrate:fresh --env=testing && php artisan db:seed --class=TestDatabaseSeeder --env=testing"
-alias phpunit="vendor/bin/phpunit"
-alias test="vendor/bin/phpunit --stop-on-error --stop-on-failure"
-alias ftest="vendor/bin/phpunit --stop-on-error --stop-on-failure tests/Feature"
-alias utest="vendor/bin/phpunit --stop-on-error --stop-on-failure tests/Unit"
-alias phpcs="vendor/bin/phpcs"
+alias phpunit='vendor/bin/phpunit'
+alias ftest='vendor/bin/pest --stop-on-error --stop-on-failure tests/Feature'
