@@ -19,7 +19,7 @@ RUN apk add --no-cache --update \
     imap-dev \
     openssl-dev git openssh \
     mariadb-client \
-    make curl linux-headers \
+    bash make cmake curl linux-headers go \
     && rm -rf /var/cache/apk/* /tmp/*
 
 
@@ -29,16 +29,16 @@ RUN pecl install pcov && docker-php-ext-enable pcov
 
 RUN docker-php-ext-install bcmath iconv mysqli gd opcache pcntl pdo pdo_mysql zip
 
-RUN pecl install grpc
+RUN pecl install grpc && docker-php-ext-enable grpc
 
-RUN mkdir -p /tmp/protoc && \
-    curl -L https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip > /tmp/protoc/protoc.zip && \
-    cd /tmp/protoc && \
-    unzip protoc.zip && \
-    cp /tmp/protoc/bin/protoc /usr/local/bin && \
-    cd /tmp && \
-    rm -r /tmp/protoc && \
-    docker-php-ext-enable grpc
+RUN mkdir -p /usr/grpc && cd /usr/grpc && \
+    git clone https://github.com/grpc/grpc.git && \
+    cd grpc && \
+    git submodule update --init && \
+    mkdir -p cmake/build && \
+    cd cmake/build && \
+    cmake ../.. && \
+    make protoc grpc_php_plugin
 
 RUN addgroup -g 1000 -S playground \
     && adduser -u 1000 -S playground -G playground

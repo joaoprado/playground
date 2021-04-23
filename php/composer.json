@@ -1,5 +1,5 @@
 {
     "require": {
-      "hirak/prestissimo": "^0.3"
+        "spiral/php-grpc": "^1.5"
     }
-} 
+}
