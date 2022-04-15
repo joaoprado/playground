@@ -8,7 +8,7 @@ fi
 # Publish new version
 echo "[NPM] Publicando nova tag: $1"
 docker build -t playground-npm:$1 .
-docker tag playground-npm:$1 joaoprado/playground-npm:$1
+docker tag joaoprado/vue-cli:$1 joaoprado/vue-cli:$1
 docker push joaoprado/playground-npm:$1
 
 # Publish latest stuff to latest tag

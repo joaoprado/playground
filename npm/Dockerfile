@@ -4,11 +4,10 @@
 #--------------------------------------------------------------------------
 #
 
-FROM alpine:latest
+FROM node:14-alpine
 LABEL maintainer="João Prado <contato@joaoprado.com.br>"
 
 RUN apk add --no-cache --update \
-    nodejs nodejs-npm \
     git \
     python3
 
@@ -19,8 +18,5 @@ RUN pip3 install --no-cache --upgrade pip setuptools
 
 RUN npm i -g @vue/cli gulp npm-check json-server \
     && rm -rf /var/cache/apk/* /tmp/*
-
-RUN addgroup -g 1000 -S playground \
-    && adduser -u 1000 -S playground -G playground
 
 WORKDIR /usr/src

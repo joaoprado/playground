@@ -12,8 +12,4 @@ alias migrate='art migrate'
 alias phpunit='vendor/bin/phpunit'
 alias ftest='vendor/bin/pest --stop-on-error --stop-on-failure tests/Feature'
 
-alias gclear="composer clear-generated-files"
-alias gclient="composer create-client-files"
-alias gserver="composer create-server-interface"
-
-export PATH=$PATH:/usr/grpc/grpc/cmake/build:/usr/grpc/grpc/cmake/build/third_party/protobuf
+alias build="rm -rfv src && ./proto-gen.sh"
