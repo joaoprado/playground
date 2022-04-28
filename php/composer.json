@@ -1,5 +1,0 @@
-{
-    "require": {
-        "spiral/php-grpc": "^1.5"
-    }
-}
